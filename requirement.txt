@@ -1,4 +1,0 @@
-regio
-segyio
-matplotlib
-tqdm
