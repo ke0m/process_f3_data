@@ -34,7 +34,6 @@ def main(args):
   all_srcys, all_srcxs = [], []
   fig = plt.figure(figsize=(14, 7))
   for srcx_file, srcy_file in zip(srcx_files, srcy_files):
-    print(srcx_file, srcy_file)
     saxes, srcx = sep.read_file(srcx_file)
     saxes, srcy = sep.read_file(srcy_file)
     srcx *= 0.001
@@ -52,7 +51,6 @@ def main(args):
     ax.set_xlabel('X (km)', fontsize=15)
     ax.set_ylabel('Y (km)', fontsize=15)
     ax.tick_params(labelsize=15)
-
   plt.show()
 
   all_srcxs = np.concatenate(all_srcxs, axis=0)
