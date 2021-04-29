@@ -1,3 +1,6 @@
 [submodule "regio"]
 	path = regio
 	url = https://github.com/ke0m/regio
+[submodule "mdsuops"]
+	path = mdsuops
+	url = https://github.com/ke0m/mdsuops.git
