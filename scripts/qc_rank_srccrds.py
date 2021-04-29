@@ -20,30 +20,27 @@ def main(args):
 
   sep = seppy.sep()
   saxes, slc = sep.read_file(args.img)
-  dt, dx, dy = saxes.d
-  ot, ox, oy = saxes.o
-  ox, oy = 469.800, 6072.350
   slc = slc.reshape(saxes.n, order='F')
+  slcw = slc[args.slc_idx, 200:1200, 5:505]
+  nx, ny = slcw.shape
+
+  ox, oy = 469800, 6072350
+  dx, dy = 25, 25
   oxv, oyv = 200, 5
-  nxv, nyv = 1000, 600
   oxw = ox + oxv * dx
   oyw = oy + oyv * dy
-  slcw = slc[args.slc_idx, oxv:oxv + nxv, oyv:oyv + nyv].T
-  ny, nx = slcw.shape
 
   all_srcys, all_srcxs = [], []
   fig = plt.figure(figsize=(14, 7))
   for srcx_file, srcy_file in zip(srcx_files, srcy_files):
     saxes, srcx = sep.read_file(srcx_file)
     saxes, srcy = sep.read_file(srcy_file)
-    srcx *= 0.001
-    srcy *= 0.001
     all_srcxs.append(srcx)
     all_srcys.append(srcy)
 
     ax = fig.gca()
     ax.imshow(
-        np.flipud(slcw),
+        np.flipud(slcw.T),
         cmap='gray',
         extent=[oxw, oxw + nx * dx, oyw, oyw + ny * dy],
     )
