@@ -4,3 +4,6 @@
 [submodule "mdsuops"]
 	path = mdsuops
 	url = https://github.com/ke0m/mdsuops.git
+[submodule "sivu"]
+	path = sivu
+	url = https://github.com/ke0m/sivu.git

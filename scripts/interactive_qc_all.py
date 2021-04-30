@@ -3,7 +3,7 @@ import argparse
 from tqdm import tqdm
 
 from regio import seppy
-from utils import qc_f3data
+from sivu.movie import qc_f3data
 
 
 def main(args):

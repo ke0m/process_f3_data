@@ -1,7 +1,7 @@
 import argparse
 
 from regio import seppy
-from utils import qc_f3data
+from sivu.movie import qc_f3data
 
 
 def main(args):
@@ -16,6 +16,7 @@ def main(args):
   # Read in the data
   daxes, data = sep.read_file(args.data)
   data = data.reshape(daxes.n, order='F').T
+  dt, _ = daxes.d
 
   # Read in the image slice
   saxes, slc = sep.read_file(args.img)
@@ -24,6 +25,7 @@ def main(args):
 
   print("Press 'n' to move forward, 'm' to move back one shot")
   print("Press 'y' to move forward, 'u' to move back %d shots" % (args.sjump))
+  ntw = 750 if dt == 0.004 else 1500
   qc_f3data(
       data,
       srcx,
@@ -32,6 +34,8 @@ def main(args):
       recy,
       nrec,
       slcw,
+      dt=dt,
+      ntw=ntw,
       pclip=args.pclip,
       sjump=args.sjump,
   )
