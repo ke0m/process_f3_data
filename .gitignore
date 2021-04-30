@@ -1,2 +1,5 @@
 *.H
+*.o
+*.so
+adf/adf.egg-info
 __pycache__

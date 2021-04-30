@@ -1,6 +1,6 @@
 #! /bin/bash
 
-ROOT_DIR=/net/brick5/data3/northsea_dutch_f3/process_f3_data/windowed_data/all/
+ROOT_DIR=/net/brick5/data3/northsea_dutch_f3/process_f3_data/windowed_data/all
 
 set -x
 
