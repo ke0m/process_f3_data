@@ -35,6 +35,7 @@ def main(args):
     dname = 'f3_shots' + suffix
     daxes, data = sep.read_file(os.path.join(args.data_dir, dname))
     data = data.reshape(daxes.n, order='F').T
+    dt, _ = daxes.d
 
     qc_f3data(
         data,
@@ -46,6 +47,8 @@ def main(args):
         slcw,
         pclip=args.pclip,
         sjump=args.sjump,
+        dt=dt,
+        ntw=args.ntw
     )
 
 
@@ -61,6 +64,7 @@ def attach_args(parser=argparse.ArgumentParser()):
   parser.add_argument("--sjump", type=int, default=10)
   parser.add_argument("--start-idx", type=int, default=0)
   parser.add_argument("--end-idx", type=int, default=-1)
+  parser.add_argument("--ntw", type=int, default=750)
   return parser
 
 

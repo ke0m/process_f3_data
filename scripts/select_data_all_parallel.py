@@ -22,7 +22,7 @@ def _process_chunk(crdchunk, hmap, fnames, rank, dt=0.002, logdir='./log'):
 
   dmap = {}
   crdarr = np.asarray(crdchunk)
-  ymin, ymax = np.min(crdarr[:, 0]), np.max(crdarr[:, 1])
+  ymin, ymax = np.min(crdarr[:, 0]), np.max(crdarr[:, 0])
   # Loop over coordinates
   for k, crd in tqdm(enumerate(crdchunk),
                      desc='rank %d nshots' % (rank),

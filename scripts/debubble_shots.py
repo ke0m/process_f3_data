@@ -18,6 +18,7 @@ def main(args):
   if args.input_filter is not None:
     faxes, invflt = sep.read_file(args.input_filter)
     laxes, lags = sep.read_file(args.input_lags)
+    lags = lags.astype('int32')
   else:
     lags, invflt = gapped_pef(
         data[args.trace_idx],
