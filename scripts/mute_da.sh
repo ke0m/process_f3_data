@@ -5,12 +5,13 @@ ROOT_DIR=/net/brick5/data3/northsea_dutch_f3/process_f3_data/windowed_data/all
 set -x
 
 python ./scripts/mute_da.py \
-  --input-data=${ROOT_DIR}/f3_shots_all_6073483-487273-wind100_interp.H \
-  --srcx=${ROOT_DIR}/f3_srcx_all_6073483-487273-wind100.H \
-  --recx=${ROOT_DIR}/f3_recx_all_6073483-487273-wind100.H \
-  --srcy=${ROOT_DIR}/f3_srcy_all_6073483-487273-wind100.H \
-  --recy=${ROOT_DIR}/f3_recy_all_6073483-487273-wind100.H \
-  --nrec-per-shot=${ROOT_DIR}/f3_nrec_all_6073483-487273-wind100.H \
-  --streamer-header=${ROOT_DIR}/f3_strm_all_6073483-487273-wind100.H \
-  --output-data=${ROOT_DIR}/f3_shots_all_6073483-487273-wind100_mute.H \
-  --water-vel=1450
+  --input-data=${ROOT_DIR}/chunks/chunk_034/f3_shots_034.H \
+  --srcx=${ROOT_DIR}/chunks/chunk_034/f3_srcx_034.H \
+  --recx=${ROOT_DIR}/chunks/chunk_034/f3_recx_034.H \
+  --srcy=${ROOT_DIR}/chunks/chunk_034/f3_srcy_034.H \
+  --recy=${ROOT_DIR}/chunks/chunk_034/f3_recy_034.H \
+  --nrec-per-shot=${ROOT_DIR}/chunks/chunk_034/f3_nrec_034.H \
+  --streamer-header=${ROOT_DIR}/chunks/chunk_034/f3_strm_034.H \
+  --output-data=${ROOT_DIR}/chunks/chunk_034/f3_mute_qc_034.H \
+  --water-vel=1450 \
+  --qc

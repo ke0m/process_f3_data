@@ -14,10 +14,13 @@ def chunks(lst, nchnks):
   nitem = len(lst)
   splits = splitnum(nitem, nchnks)
   beg, end = 0, splits[0]
-  for isplit in splits:
-    yield lst[beg:end]
-    beg = end
-    end += isplit
+  for i in range(nchnks):
+    if i == nchnks - 1:
+      yield lst[beg:]
+    else:
+      yield lst[beg:end]
+      beg = end
+      end += splits[i + 1]
 
 
 def plot_acq(
