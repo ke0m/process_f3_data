@@ -37,7 +37,11 @@ def attach_args(parser=argparse.ArgumentParser()):
       type=str,
       default="/scratch/joseph29/f3_data_chunks/all_chunks",
   )
-  parser.add_argument("--fg-chunk-list", type=str, default='fg-chunks.txt')
+  parser.add_argument(
+      "--fg-chunk-list",
+      type=str,
+      default='./doc/fg-chunks.txt',
+  )
   return parser
 
 

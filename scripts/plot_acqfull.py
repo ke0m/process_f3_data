@@ -1,7 +1,7 @@
 import argparse
 
 from regio import seppy
-from utils import plot_acq
+from sivu.plot import plot_acq
 
 
 def main(args):
@@ -16,34 +16,13 @@ def main(args):
   naxes, nrec = sep.read_file(args.nrec_per_shot)
   nrec = nrec.astype('int32')
 
-  srcx *= 0.001
-  srcy *= 0.001
-  recx *= 0.001
-  recy *= 0.001
-
   # Read in time slice for QC
+  sep = seppy.sep()
   saxes, slc = sep.read_file(args.img)
-  dt, dx, dy = saxes.d
-  ot, ox, oy = saxes.o
-  ox, oy = 469.800, 6072.350
   slc = slc.reshape(saxes.n, order='F')
-  oxv, oyv = 200, 5
-  nxv, nyv = 1000, 600
-  oxw = ox + oxv * dx
-  oyw = oy + oyv * dy
-  slcw = slc[args.slc_idx, oxv:oxv + nxv, oyv:oyv + nyv].T
+  slcw = slc[args.slc_idx, 200:1200, 5:505]
 
-  plot_acq(
-      srcx,
-      srcy,
-      recx,
-      recy,
-      slcw,
-      ox=oxw,
-      oy=oyw,
-      recs=False,
-      show=True,
-  )
+  plot_acq(srcx, srcy, recx, recy, slcw, recs=False, show=True)
 
 
 def attach_args(parser=argparse.ArgumentParser()):

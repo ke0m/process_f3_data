@@ -31,7 +31,7 @@ def main(args):
   """
 
   # Make chunk names
-  for i in range(args.start_idx, args.end_idx+1):
+  for i in range(args.start_idx, args.end_idx + 1):
     tag = create_inttag(i, 100)
     if tag in fg_chunks:
       chunk_name = 'chunk_%sfg' % create_inttag(i, 100)
@@ -50,12 +50,26 @@ def main(args):
 
 
 def attach_args(parser=argparse.ArgumentParser()):
-  parser.add_argument("--root-dir", type=str, default="./windowed_data/all/chunks")
+  parser.add_argument("--root-dir",
+                      type=str,
+                      default="./windowed_data/all/chunks")
   parser.add_argument("--start-idx", type=int, default=0)
   parser.add_argument("--end-idx", type=int, default=299)
-  parser.add_argument("--noisy-chunk-list", type=str, default='noisy-chunks.txt')
-  parser.add_argument("--omit-chunk-list", type=str, default='omit-chunks.txt')
-  parser.add_argument("--fg-chunk-list", type=str, default='fg-chunks.txt')
+  parser.add_argument(
+      "--noisy-chunk-list",
+      type=str,
+      default='./doc/noisy-chunks.txt',
+  )
+  parser.add_argument(
+      "--omit-chunk-list",
+      type=str,
+      default='./doc/omit-chunks.txt',
+  )
+  parser.add_argument(
+      "--fg-chunk-list",
+      type=str,
+      default='./doc/fg-chunks.txt',
+  )
   return parser
 
 
