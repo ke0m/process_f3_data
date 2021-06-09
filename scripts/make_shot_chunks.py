@@ -42,36 +42,50 @@ def main(args):
     chunk_dir = os.path.join(args.output_dir, 'chunk_' + tag)
     if not os.path.isdir(chunk_dir):
       os.mkdir(chunk_dir)
-    sep.write_file(
-        os.path.join(chunk_dir, 'f3_srcx_' + tag + '.H'),
-        srcx_chunk.astype('float32'),
-    )
-    sep.write_file(
-        os.path.join(chunk_dir, 'f3_srcy_' + tag + '.H'),
-        srcy_chunk.astype('float32'),
-    )
-    sep.write_file(
-        os.path.join(chunk_dir, 'f3_nrec_' + tag + '.H'),
-        nrec_chunk.astype('float32'),
-    )
-    sep.write_file(
-        os.path.join(chunk_dir, 'f3_recx_' + tag + '.H'),
-        recx_chunk.astype('float32'),
-    )
-    sep.write_file(
-        os.path.join(chunk_dir, 'f3_recy_' + tag + '.H'),
-        recy_chunk.astype('float32'),
-    )
-    sep.write_file(
-        os.path.join(chunk_dir, 'f3_strm_' + tag + '.H'),
-        strm_chunk.astype('float32'),
-    )
-    sep.write_file(
-        os.path.join(chunk_dir, 'f3_shots_' + tag + '.H'),
-        dat.astype('float32'),
-        os=daxes.o,
-        ds=daxes.d,
-    )
+    if not args.to_npy:
+      sep.write_file(
+          os.path.join(chunk_dir, 'f3_srcx_' + args.string_id + tag + '.H'),
+          srcx_chunk.astype('float32'),
+      )
+      sep.write_file(
+          os.path.join(chunk_dir, 'f3_srcy_' + args.string_id + tag + '.H'),
+          srcy_chunk.astype('float32'),
+      )
+      sep.write_file(
+          os.path.join(chunk_dir, 'f3_nrec_' + args.string_id + tag + '.H'),
+          nrec_chunk.astype('float32'),
+      )
+      sep.write_file(
+          os.path.join(chunk_dir, 'f3_recx_' + args.string_id + tag + '.H'),
+          recx_chunk.astype('float32'),
+      )
+      sep.write_file(
+          os.path.join(chunk_dir, 'f3_recy_' + args.string_id + tag + '.H'),
+          recy_chunk.astype('float32'),
+      )
+      sep.write_file(
+          os.path.join(chunk_dir, 'f3_strm_' + args.string_id + tag + '.H'),
+          strm_chunk.astype('float32'),
+      )
+      sep.write_file(
+          os.path.join(chunk_dir, 'f3_shots_' + args.string_id + tag + '.H'),
+          dat.astype('float32'),
+          os=daxes.o,
+          ds=daxes.d,
+      )
+    else:
+      odict = {}
+      odict['dt'] = daxes.d[0]
+      odict['f3_shots'] = np.ascontiguousarray(dat.T).astype('float32')
+      odict['f3_nrec'] = nrec_chunk.astype('int32')
+      odict['f3_srcx'] = srcx_chunk.astype('float32')
+      odict['f3_srcy'] = srcy_chunk.astype('float32')
+      odict['f3_recx'] = recx_chunk.astype('float32')
+      odict['f3_recy'] = recy_chunk.astype('float32')
+      np.save(
+          os.path.join(chunk_dir, 'chunk_' + args.string_id + tag + '.npy'),
+          odict,
+      )
     # Update counters
     begsht = endsht
     endsht += args.chunk_size
@@ -115,6 +129,8 @@ def attach_args(parser=argparse.ArgumentParser()):
       type=str,
       default=os.path.join(path, 'all/f3_strm_all_combined.H'),
   )
+  parser.add_argument("--string-id", type=str, default=None)
+  parser.add_argument("--to-npy", action='store_true', default=False)
   parser.add_argument("--chunk-size", type=int, default=100)
   parser.add_argument(
       "--output-dir",
